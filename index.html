@@ -24,14 +24,16 @@
         <span class="text-xs">points</span>
       </h1>
 
-      <div class="grid grid-cols-4 gap-10">
+      <div class="grid grid-cols-6 gap-8">
         <template x-for="card in cards">
           <div>
             <button
               x-show="!card.cleared"
-              class="h-32 w-24 rounded hover:opacity-70"
-              :style="'background: ' + (card.flipped? card.color : 'black')
-                + '; cursor: ' + (flippedCards.length == 2 ? 'not-allowed' : 'auto')"
+              class="h-32 w-24 rounded bg-contain bg-center bg-cover hover:opacity-80"
+              :style="'background: ' + (!card.flipped? 'black' : card.color)
+                + '; cursor: ' + (flippedCards.length == 2 ? 'not-allowed' : 'auto')
+                + (card.flipped ? '; background-image: url(' + card.url + '); background-size: 96px 128px' : '')
+                "
               @click="flipCard(card)"
               :disabled="flippedCards.length === 2"
               >
@@ -55,14 +57,24 @@
       function game() {
         return {
           cards: ([
-            { color: 'green', flipped: false, cleared: false },
-            { color: 'orange', flipped: false, cleared: false },
-            { color: 'purple', flipped: false, cleared: false },
-            { color: 'teal', flipped: false, cleared: false },
-            { color: 'orange', flipped: false, cleared: false },
-            { color: 'green', flipped: false, cleared: false },
-            { color: 'teal', flipped: false, cleared: false },
-            { color: 'purple', flipped: false, cleared: false },
+            { color: 'green', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1533926392763-a1df3bf391f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80' },
+            { color: 'orange', flipped: false, cleared: false , url: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=639&q=80'},
+            { color: 'purple', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1603349136288-95d87bd0a268?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' },
+            { color: 'gold', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1589182337358-2cb63099350c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' },
+            { color: 'orange', flipped: false, cleared: false , url: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=639&q=80'},
+            { color: 'green', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1533926392763-a1df3bf391f1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80' },
+            { color: 'gold', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1589182337358-2cb63099350c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' },
+            { color: 'purple', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1603349136288-95d87bd0a268?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' },
+            { color: 'red', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1517519014922-8fc06b814a0e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=676&q=80' },
+            { color: 'red', flipped: false, cleared: false , url: 'https://images.unsplash.com/photo-1517519014922-8fc06b814a0e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=676&q=80'},
+            { color: 'blue', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=678&q=80' },
+            { color: 'blue', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=678&q=80' },
+            { color: 'salmon', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1535745023281-627f021e68b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' },
+            { color: 'salmon', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1535745023281-627f021e68b0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80' },
+            { color: 'yellow', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=675&q=80' },
+            { color: 'yellow', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=675&q=80' },
+            { color: 'chartreuse', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1545006398-2cf47cd87b90?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=615&q=80' },
+            { color: 'chartreuse', flipped: false, cleared: false, url: 'https://images.unsplash.com/photo-1545006398-2cf47cd87b90?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=615&q=80' },
           ]).sort(() => Math.random() - 0.5),
           get flippedCards() {
             return this.cards.filter(card => card.flipped)
