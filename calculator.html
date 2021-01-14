@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="flex flex-col items-center justify-center m-10">
+      <h1>World's Simplest Calculator</h1>
+      <div x-data="{ first: 0, second: 0}">
+        <input type="number" x-model.number="first" class="border p-1" />
+         +
+         <input type="number" x-model.number="second" class="border p-1"/>
+          =
+          <output x-text="first + second"></output>
+      </div>
+    </div>
+  </body>
+</html>
