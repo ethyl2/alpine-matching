@@ -8,7 +8,7 @@
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <div x-data="game()" class="p-10 flex items-center justify-center bg-gray-100 min-h-screen">
+    <div x-data="game()" class="p-2 flex items-center justify-center bg-gray-100 min-h-screen md:p-10">
       <div x-data="{ show: true, message: 'Welcome to the match game!'}"
         x-show.transition.opacity="show"
         x-text="message"
@@ -17,14 +17,14 @@
           show = true;
           setTimeout(() => show = false, 1000)
         "
-        class="fixed top-0 left-0 m-12 p-10 font-bold text-lg"
+        class="fixed top-0 left-0 m-2 p-10 font-bold text-lg md:m-12"
       ></div>
-      <h1 class="fixed top-0 right-0 m-12 p-10 font-bold text-3xl">
+      <h1 class="fixed top-0 right-0 m-12 pt-10 font-bold text-3xl md:p-10">
         <span x-text="points"></span>
         <span class="text-xs">points</span>
       </h1>
 
-      <div class="grid grid-cols-6 gap-8">
+      <div class="grid grid-cols-3 gap-2 pt-32 sm:gap-4 sm:grid-cols-4 md:pt-10 md:grid-cols-6 md:gap-8">
         <template x-for="card in cards">
           <div>
             <button
