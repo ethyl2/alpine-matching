@@ -2,6 +2,7 @@
 
 Experimenting with [Alpine.js](https://github.com/alpinejs/alpine).
 
+Deployed site: https://ethyl2.github.io/alpine-matching/
 
 This project's code is based on the first episode of the [laracast](https://laracasts.com/series/alpine-essentials/episodes/1), with additional features of
  - shuffling the cards
