@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs Example</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div x-data="display()" class="container m-10 relative">
+
+      <div class="z-20 absolute top-0 left-0">
+        <button
+          @click="currentTab = 'first'"
+          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
+          :class="{ 'font-bold' : currentTab==='first' }"
+          >First
+        </button>
+        <button
+          @click="currentTab = 'second'"
+          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
+          :class="{ 'font-bold' : currentTab==='second' }"
+          >Second
+        </button>
+        <button
+          @click="currentTab = 'third'"
+          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
+          :class="{ 'font-bold' : currentTab==='third' }"
+          >Third
+        </button>
+        <button
+          @click="currentTab = 'fourth'"
+          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
+          :class="{ 'font-bold' : currentTab==='fourth' }"
+          >Fourth
+        </button>
+      </div>
+      <div class="px-4 py-4 border-2 border-black rounded-b absolute left-0 w-full bg-white z-10" style="top: 32px;">
+        <template x-for="tab in tabs">
+          <div x-show="currentTab === tab.tabNum" class="flex flex-col items-center justify-center">
+            <h2 x-text="tab.question" class="text-xl p-2"></h2>
+            <button
+              @click="tab.showAnswer = true"
+              class="border p-1 rounded my-1 hover:bg-gray-100"
+              :class="{ 'hidden': tab.showAnswer }"
+            >
+              ❓
+            </button>
+            <p x-show.transition.duration.1000ms="tab.showAnswer === true" x-text="tab.answer"></p>
+
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <script>
+      function display() {
+          return {
+            currentTab: 'first',
+            message: 'Here is the message',
+            tabs: [
+              {
+                tabNum: 'first',
+                question: ' Did you hear about the racing snail who got rid of his shell?',
+                answer: 'He thought it would make him faster, but it just made him sluggish.',
+                showAnswer: false
+              },
+              {
+                tabNum: 'second',
+                question: ' What do you call a lazy baby kangaroo?',
+                answer: 'A pouch potato.',
+                showAnswer: false
+              },
+              {
+                tabNum: 'third',
+                question: ' What did the fish say when it swam into a wall?',
+                answer: 'Dam!',
+                showAnswer: false
+              },
+              {
+                tabNum: 'fourth',
+                question: ' How long do chickens work?',
+                answer: 'Around the cluck!',
+                showAnswer: false
+              }]
+          }
+        }
+    </script>
+  </body>
+</html>
