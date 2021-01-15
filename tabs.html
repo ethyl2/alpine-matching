@@ -9,8 +9,8 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   </head>
 
-  <body>
-    <div x-data="display()" class="container m-10 relative">
+  <body class="min-h-screen">
+    <div x-data="display()" class="container m-px relative md:m-10">
       <!-- Top Tabs -->
       <div class="z-20 absolute top-0 left-0">
         <template x-for="tab in tabs">
@@ -27,7 +27,7 @@
       <div class="px-4 py-4 border-2 border-black rounded-b absolute left-0 w-full bg-white z-10" style="top: 32px;">
         <template x-for="tab in tabs">
           <div x-show="currentTab === tab.tabNum" class="flex flex-col items-center justify-center">
-            <h2 x-text="tab.question" class="text-xl p-2"></h2>
+            <h2 x-text="tab.question" class="text-xl p-2 text-center"></h2>
             <button
               @click="tab.showAnswer = true"
               class="border p-1 rounded my-1 hover:bg-gray-100"
@@ -35,8 +35,8 @@
             >
               ❓
             </button>
-            <p x-show.transition.duration.1000ms="tab.showAnswer === true" x-text="tab.answer"></p>
-            <img :src="tab.imgUrl" :alt="tab.animal" class="w-2/3 mx-auto py-4" />
+            <p x-show.transition.duration.1000ms="tab.showAnswer === true" x-text="tab.answer" class="text-center"></p>
+            <img :src="tab.imgUrl" :alt="tab.animal" class="w-5/6 mx-auto py-4 md:w-2/3" />
 
           </div>
         </template>
@@ -75,6 +75,14 @@
               },
               {
                 tabNum: 'fourth',
+                animal: 'dog',
+                question: 'What do you get when you cross a dog and a calculator?',
+                answer: 'A friend you can count on.',
+                showAnswer: false,
+                imgUrl: 'https://images.unsplash.com/photo-1587891032243-94db1143e278?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80'
+              },
+              {
+                tabNum: 'fifth',
                 animal: 'chicken',
                 question: ' How long do chickens work?',
                 answer: 'Around the cluck!',
