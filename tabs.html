@@ -11,33 +11,19 @@
 
   <body>
     <div x-data="display()" class="container m-10 relative">
-
+      <!-- Top Tabs -->
       <div class="z-20 absolute top-0 left-0">
-        <button
-          @click="currentTab = 'first'"
-          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
-          :class="{ 'font-bold' : currentTab==='first' }"
-          >First
-        </button>
-        <button
-          @click="currentTab = 'second'"
-          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
-          :class="{ 'font-bold' : currentTab==='second' }"
-          >Second
-        </button>
-        <button
-          @click="currentTab = 'third'"
-          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
-          :class="{ 'font-bold' : currentTab==='third' }"
-          >Third
-        </button>
-        <button
-          @click="currentTab = 'fourth'"
-          class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
-          :class="{ 'font-bold' : currentTab==='fourth' }"
-          >Fourth
-        </button>
+        <template x-for="tab in tabs">
+          <button @click="currentTab = tab.tabNum; tab.showAnswer = false"
+            class="bg-green-400 text-white p-1 border-2 border-black border-b-0 rounded-t-lg z-20 focus:bg-green-600"
+            :class="{ 'font-bold' : currentTab=== tab.tabNum }"
+            x-text="tab.animal"
+            >
+          </button>
+        </template>
       </div>
+
+      <!-- Content -->
       <div class="px-4 py-4 border-2 border-black rounded-b absolute left-0 w-full bg-white z-10" style="top: 32px;">
         <template x-for="tab in tabs">
           <div x-show="currentTab === tab.tabNum" class="flex flex-col items-center justify-center">
@@ -50,6 +36,7 @@
               ❓
             </button>
             <p x-show.transition.duration.1000ms="tab.showAnswer === true" x-text="tab.answer"></p>
+            <img :src="tab.imgUrl" :alt="tab.animal" class="w-2/3 mx-auto py-4" />
 
           </div>
         </template>
@@ -64,27 +51,35 @@
             tabs: [
               {
                 tabNum: 'first',
+                animal: 'snail',
                 question: ' Did you hear about the racing snail who got rid of his shell?',
                 answer: 'He thought it would make him faster, but it just made him sluggish.',
-                showAnswer: false
+                showAnswer: false,
+                imgUrl: 'https://images.unsplash.com/photo-1566313874294-c15c4dd11b61?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80'
               },
               {
                 tabNum: 'second',
+                animal: 'kangaroo',
                 question: ' What do you call a lazy baby kangaroo?',
                 answer: 'A pouch potato.',
-                showAnswer: false
+                showAnswer: false,
+                imgUrl: 'https://images.unsplash.com/photo-1556513584-7452cfa1c201?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80'
               },
               {
                 tabNum: 'third',
+                animal: 'fish',
                 question: ' What did the fish say when it swam into a wall?',
                 answer: 'Dam!',
-                showAnswer: false
+                showAnswer: false,
+                imgUrl: 'https://images.unsplash.com/photo-1523990016249-31c39d461024?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'
               },
               {
                 tabNum: 'fourth',
+                animal: 'chicken',
                 question: ' How long do chickens work?',
                 answer: 'Around the cluck!',
-                showAnswer: false
+                showAnswer: false,
+                imgUrl: 'https://images.unsplash.com/photo-1553161170-0c3481941f27?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1049&q=80'
               }]
           }
         }
