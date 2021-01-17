@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User Card with Favorite Animal</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+
+  <body class="min-h-screen">
+    <div x-data="data()" class="container my-16 w-11/12 mx-auto md:w-2/3">
+      <h1 class="text-2xl my-2">Create a user card that features your favorite animal</h1>
+      <p class="italic text-sm mb-2">(This form just uses a dummy backend. The info you submit is not actually stored.)</p>
+      <form @submit.prevent="submit" class="w-full mb-4 md:w-2/3">
+        <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="name">
+          Name*
+        </label>
+
+        <input
+          class="border border-gray-400 p-2 w-full mb-4"
+          type="text"
+          name="name"
+          id="name"
+          x-model="formData.name"
+          required />
+
+        <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
+          Email*
+        </label>
+
+        <input
+          class="border border-gray-400 p-2 w-full mb-4"
+          type="email"
+          name="email"
+          id="name"
+          x-model="formData.email"
+          required
+        />
+
+        <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="avatar">
+          Avatar Url
+        </label>
+
+        <input
+          class="border border-gray-400 p-2 w-full mb-4"
+          type="url"
+          name="avatar"
+          id="avatar"
+          x-model="formData.avatar"
+        />
+
+        <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="animal">
+          Favorite Animal*
+        </label>
+
+        <input
+          class="border border-gray-400 p-2 w-full mb-4"
+          type="text"
+          name="animal"
+          id="animal"
+          x-model="formData.animal"
+          list="animalOptions"
+          required />
+
+        <datalist id="animalOptions">
+          <option>Cat</option>
+          <option>Dog</option>
+          <option>Fox</option>
+          <option>Mouse</option>
+          <option>Pig</option>
+          <option>Penguin</option>
+          <option>Pufferfish</option>
+          <option>Quail</option>
+          <option>Raccoon</option>
+          <opton>Snake</opton>
+          <option>Squirrel</option>
+          <option>Turkey</option>
+        </datalist>
+
+        <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="animalUrl">
+          Animal Image Url
+        </label>
+
+        <input class="border border-gray-400 p-2 w-full mb-4" type="url" name="animalUrl" id="animalUrl" x-model="formData.animalUrl" />
+
+        <button
+          type="submit"
+          class="px-2 py-1 bg-gray-300 rounded mb-2 hover:bg-gray-400"
+          >Submit
+        </button>
+
+        <p class="text-xs italic">* required field</p>
+      </form>
+
+      <template x-if="user">
+        <div class="border p-2 mb-2 w-full md:w-1/3">
+          <div
+            class="w-full h-48 border bg-contain bg-center mb-2"
+            :style="`background: url(${user.animalUrl ? user.animalUrl : placeholderImages.animal}) no-repeat center/cover`"
+          ></div>
+          <div class="flex items-center space-x-2">
+            <img :src="user.avatar ? user.avatar : placeholderImages.avatar" :alt="user.name"
+              class="w-16 h-16 p-1 rounded-full border shadow" />
+            <div class="flex flex-col">
+              <h3 x-text="user.name" class="font-bold text-base"></h3>
+              <a
+                :href="`mailto:${user.email}`"
+                x-text="user.email"
+                class="text-xs text-blue-700 mb-px hover:underline hover:text-blue-500">
+              </a>
+              <p class="text-xs">
+                <span class="font-bold">Fav Animal:</span> <span x-text="user.animal"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </template>
+
+    </div>
+
+    <script>
+      function data() {
+        return {
+          formData: {
+            name: '',
+            email: '',
+            avatar: '',
+            animal: '',
+            animalUrl: ''
+          },
+          user: null,
+          placeholderAnimal: 'Mouse',
+          placeholderImages: {
+            avatar: 'https://images.unsplash.com/photo-1601814933824-fd0b574dd592?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+            animal: 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80'
+          },
+          animalOptionsImages: {
+            Cat: 'https://images.unsplash.com/photo-1548366086-7f1b76106622?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=624&q=80',
+            Penguin: 'https://images.unsplash.com/photo-1602576016551-f3f0149901da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+            Fox: 'https://images.unsplash.com/photo-1571775300229-7e84bff45eae?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+            Pig : 'https://images.unsplash.com/photo-1541689221361-ad95003448dc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+            Pufferfish: 'https://images.unsplash.com/photo-1573624657783-e3d33353ca2e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80',
+            Dog: 'https://images.unsplash.com/photo-1552248239-37121e7bd7ca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+            Mouse: 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1055&q=80',
+            Snake: 'https://images.unsplash.com/photo-1528158222524-d4d912d2e208?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1024&q=80',
+            Squirrel: 'https://images.unsplash.com/photo-1518770352423-dce09a3d3307?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80',
+            Quail: 'https://images.unsplash.com/photo-1603482323784-673efc053a84?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80',
+            Raccoon: 'https://images.unsplash.com/photo-1539144713830-823aac3308f2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80',
+            Turkey: 'https://images.unsplash.com/photo-1561012348-8ccce14ffee2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=888&q=80'
+          },
+
+          submit() {
+            fetch('https://reqres.in/api/users', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(this.formData)
+            })
+              .then(response => response.json())
+              .then(user => {
+                this.user = user
+                if (!this.user.animalUrl && this.animalOptionsImages[this.user.animal]) {
+                    this.placeholderImages.animal = this.animalOptionsImages[this.user.animal]
+                }
+              });
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
