@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Alpine Examples</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+
+  <body class="flex flex-col items-center justify-center h-screen">
+
+    <div x-data="{ show: false }">
+      <div class="w-64 h-64">
+        <div
+          class="bg-green-400 w-full h-full bg-cover bg-center"
+          style="background-image: url('https://images.unsplash.com/photo-1532802245604-c567f1acd48e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1113&q=80')"
+          x-show="show"
+          x-transition:enter="transition transform duration-1000"
+          x-transition:enter-start="opacity-0 scale-0 rotate-180"
+          x-transition:enter-end="rotate-0"
+          x-transition:leave="transition transform duration-700"
+          x-transition:leave-start="rotate-0"
+          x-transition:leave-end="opacity-0 scale-0 -rotate-180">
+        </div>
+      </div>
+
+      <button
+        @click="show = ! show"
+        x-text="(show? 'Hide': 'Reveal') + ' the Mystery Animal'"
+        class="mt-12 w-full p-2 border hover:bg-gray-200"
+      >
+      </button>
+    </div>
+
+  </body>
+
+</html>
