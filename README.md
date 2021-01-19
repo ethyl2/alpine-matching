@@ -18,3 +18,4 @@ My other Alpine.js examples in this repo:
   - [Tabs with Animal Jokes](https://ethyl2.github.io/alpine-matching/tabs)
   - [User Card with Favorite Animal](https://ethyl2.github.io/alpine-matching/create-user)
   - [Pet Care Tasks](https://ethyl2.github.io/alpine-matching/tasks)
+  - [Reveal the Mystery Animal (Transition Example)](https://ethyl2.github.io/alpine-matching/transition)
