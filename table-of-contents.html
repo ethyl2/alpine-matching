@@ -7,26 +7,35 @@
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
   </head>
 
-  <body class="grid items-center justify-center h-screen">
+  <body>
+    <div
+      style="background-image: url('images/book.png')"
+      class="container bg-contain bg-center mx-24 relative h-32 md:h-screen md:bg-cover"
+    >
+      <div
+        class="flex flex-col items-center justify-center w-full absolute top-44 right-0 md:mr-20 md:w-1/2"
+        x-data="{ show: false }"
+        @click.away="show = false"
+        >
+        <h1 class="text-3xl mb-2">Table of Contents</h1>
+        <button @click="show = ! show" class="italic mb-4" x-text="`${show? 'Hide' : 'See'} Pages`"></button>
 
-    <div x-data="{ show: false }" @click.away="show = false">
-      <button @click="show = ! show">Links</button>
+        <div class="bg-black text-white py-2 rounded mt-1" x-show="show"
+          x-transition:enter="transition duration-200 transform ease-out" x-transition:enter-start="scale-75"
+          x-transition:leave="transition duration-100 transform ease-in" x-transition:leave-end="opacity-0 scale-90">
+          <a class="block hover:bg-gray-800 py-px px-4" href="/">Matching</a>
+          <a class="block hover:bg-gray-800 py-px px-4" href="create-user.html">User Card</a>
+          <a class="block hover:bg-gray-800 py-px px-4" href="calculator.html">Simplest Calculator</a>
+          <a class="block hover:bg-gray-800 py-px px-4" href="tabs.html">Jokes</a>
+          <a class="block hover:bg-gray-800 py-px px-4" href="tasks.html">Pet Care Tasks</a>
+          <a class="block hover:bg-gray-800 py-px px-4" href="transition.html">Mystery Animal</a>
+        </div>
 
-      <div class="absolute bg-black text-white py-2 rounded mt-1" x-show="show"
-        x-transition:enter="transition duration-200 transform ease-out" x-transition:enter-start="scale-75"
-        x-transition:leave="transition duration-100 transform ease-in" x-transition:leave-end="opacity-0 scale-90">
-        <a class="block hover:bg-gray-800 text-xs py-px px-4" href="/">Matching</a>
-        <a class="block hover:bg-gray-800 text-xs py-px px-4" href="create-user.html">User Card</a>
-        <a class="block hover:bg-gray-800 text-xs py-px px-4" href="calculator.html">Simplest Calculator</a>
-        <a class="block hover:bg-gray-800 text-xs py-px px-4" href="tabs.html">Jokes</a>
-        <a class="block hover:bg-gray-800 text-xs py-px px-4" href="tasks.html">Pet Care Tasks</a>
-        <a class="block hover:bg-gray-800 text-xs py-px px-4" href="transition.html">Mystery Animal</a>
       </div>
     </div>
-
   </body>
 
 </html>
