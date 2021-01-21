@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Alpine Examples</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <link href="https://unpkg.com/tailwindcss@2.0.1/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+
+  <body class="p-12">
+    <div class="flex space-x-4">
+      <div
+        x-data="{ fact: 'Turtles do not have teeth. They use their beak-like mouth to grasp their food. This beak is made of keratin (the same stuff your fingernails are made of).'}"
+        >
+        <button
+          @click="$dispatch('flash', fact)"
+          class="bg-green-100 rounded p-2 m-2 hover:bg-gray-100"
+        >Show Animal Fact #1</button>
+      </div>
+
+      <div
+        x-data="{ fact: 'Cookie cutter sharks are named for the round ‘cookie’ bite marks they leave.'}">
+        <button
+          @click="flash(fact)"
+          class="bg-green-100 rounded p-2 m-2 hover:bg-gray-100"
+          >Show Animal Fact #2</button>
+      </div>
+
+      <div x-data="{ fact: 'Bees have 4 wings. The two wings on each side hook together to form one larger pair when flying and then unhook when they’re not flying.'}">
+        <button @click="flash(fact)" class="bg-green-100 rounded p-2 m-2 hover:bg-gray-100">Show Animal Fact #3</button>
+      </div>
+    </div>
+
+    <hr />
+    <!-- Flash -->
+    <div x-data="{ show: false, message: '' }"
+      x-show.transition.opacity.scale.75.duration="show"
+      @flash.window="
+        show = true;
+        message = $event.detail;
+        setTimeout(() => show = false, 5000);
+      "
+      x-text="message"
+      class="bg-green-500 text-white mt-4 p-4 rounded max-width-xs"
+    >
+    </div>
+
+    <!-- <div x-data @consoleFlash.window="alert('Caught the consoleFlash')">Test</div> -->
+    <!-- For an example of dispatching an event in the console, uncomment the line above and type the line below in the console -->
+    <!-- window.dispatchEvent(new Event('consoleflash')); -->
+
+    <script>
+      // Additionally, any component can call $dispatch('flash', 'A flash message');
+
+      window.flash = message => window.dispatchEvent(new CustomEvent('flash', { detail: message }));
+    </script>
+  </body>
+
+</html>
