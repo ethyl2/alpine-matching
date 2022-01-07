@@ -10,6 +10,7 @@
     <title>Pokemon Search</title>
     <meta name="description" content="Pokemon search, made with Alpine.js">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico?" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -69,7 +70,7 @@
           <div class="flex flex-col items-center justify-center">
             <div class="flex flex-row items-start justify-center pt-10 mx-auto">
               <!-- BACK IMAGE -->
-              <div class="flex items-center justify-center mr-4">
+              <div class="flex items-center justify-center mr-4 bg-gray-900 rounded p-1">
                 <img
                   :src="pokemon.sprites.back_default"
                   :alt="pokemon.name"
@@ -109,7 +110,7 @@
               </div>
 
               <!-- FRONT IMAGE -->
-              <div class="flex items-center justify-center ml-4">
+              <div class="flex items-center justify-center ml-4 bg-gray-900 rounded p-1">
                 <img :src="pokemon.sprites.front_default" :alt="pokemon.name" />
               </div>
             </div>
@@ -128,7 +129,7 @@
             <template x-if="sprites">
               <div>
                 <h4 class="text-gray-900 text-sm font-bold uppercase leading-none mb-2 text-center mt-6">Sprites</h4>
-                <div class="flex items-center justify-start w-full overflow-x-auto md:justify-around">
+                <div class="flex items-center justify-start w-full overflow-x-auto md:justify-around bg-gray-900 p-2 rounded">
                   <template x-for="pokemonSprite in sprites" :key="pokemonSprite">
                     <img :src="pokemonSprite" alt="pokemon sprite" />
                   </template>
