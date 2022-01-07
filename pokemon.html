@@ -8,60 +8,172 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Pokemon Search</title>
-    <meta name="description" content="">
+    <meta name="description" content="Pokemon search, made with Alpine.js">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+      rel="stylesheet">
   </head>
-  <body>
+  <body style="font-family: 'Nanum Gothic', sans-serif;">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="flex flex-col md:flex-row">
-      <div x-data="pokeSearch()" x-init="fetchPokemon()" class="md:w-1/3 flex flex-col p-10">
-        <div class="flex flex-row">
-          <input type="text" name="pokemonSearch" x-model="pokemonSearch"
-            class="flex w-2/3 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 appearance-none leading-normal" />
-          <button type="submit" @click="fetchPokemon()" class="flex bg-blue-500 text-white font-bold py-2 px-4 rounded"
-            :class="[ isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700' ]" :disabled="isLoading">
+
+      <header class="w-full bg-green-100 py-6 text-center text-2xl mb-6 font-semibold">PokeSearch</header>
+      <div
+        x-data="pokeSearch()"
+        x-init="fetchPokemon()"
+        class="flex flex-col p-10 bg-yellow-100 mx-auto md:w-2/3"
+      >
+        <!-- SEARCH FORM -->
+        <div class="flex flex-row mx-auto">
+          <input
+            class="flex w-2/3 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-l-lg py-2 px-4 appearance-none leading-normal"
+            type="text"
+            name="pokemonSearch"
+            x-model="pokemonSearch"
+          />
+          <button
+            class="flex bg-blue-500 text-white font-bold py-2 px-4 rounded-r-lg"
+            :class="[ isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700' ]"
+            type="submit"
+            @click="fetchPokemon()"
+            :disabled="isLoading"
+          >
             Search
           </button>
         </div>
+
+        <template x-if="isLoading">
+          <svg class="mx-auto animate-spin h-5 w-5 text-blue-500 mt-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+          </svg>
+        </template>
+
+        <!-- POKEMON INFO -->
         <template x-if="pokemon">
-          <div class="flex flex-row pt-10">
-            <div class="flex mr-4">
-              <img :src="pokemon.sprites.front_default" :alt="pokemon.name" />
-            </div>
-            <div class="text-sm justify-center flex flex-col">
-              <h3 class="text-gray-900 text-sm font-bold uppercase leading-none mb-2" x-text="pokemon.name"></h3>
-              <div class="flex flex-row flex-wrap">
-                <template x-for="abilityObj in pokemon.abilities" :key="abilityObj.ability.url">
-                  <span x-text="abilityObj.ability.name"
-                    class="flex bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700"></span>
-                </template>
+          <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-row items-start justify-center pt-10 mx-auto">
+              <!-- BACK IMAGE -->
+              <div class="flex items-center justify-center mr-4">
+                <img
+                  :src="pokemon.sprites.back_default"
+                  :alt="pokemon.name"
+                />
+              </div>
+
+              <!-- NAME -->
+              <div class="text-sm justify-center flex flex-col">
+                <h3
+                  class="text-gray-900 text-lg font-bold uppercase leading-none mb-2 text-center"
+                  x-text="pokemon.name"
+                ></h3>
+
+                <!-- STATS -->
+                <p class="pb-2 text-xs text-center">Weight: <span x-text="pokemon.weight"></span> hectograms</p>
+                <p class="pb-4 text-xs text-center">Height: <span x-text="pokemon.height"></span> decimetres</p>
+
+                <!-- TYPES -->
+                <h4 class="text-gray-900 text-sm font-bold uppercase leading-none mb-2 text-center">TYPES</h4>
+                <div class="flex flex-row space-x-1 item-center justify-center pb-6">
+                  <template x-if="types" x-for="typeTest in types" :key="types">
+                    <span x-text="typeTest"
+                      class="flex items-center justify-center text-center bg-purple-200 rounded-full px-3 py-1 text-xs font-semibold text-black">
+                    </span>
+                  </template>
+                </div>
+
+                <!-- ABILITIES -->
+                <h4 class="text-gray-900 text-sm font-bold uppercase leading-none mb-2 text-center">ABILITIES</h4>
+                <div class="flex flex-row space-x-1 item-center justify-center">
+                  <template x-for="abilityObj in pokemon.abilities" :key="abilityObj.ability.url">
+                    <span x-text="abilityObj.ability.name"
+                      class="flex items-center justify-center text-center bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-black">
+                    </span>
+                  </template>
+                </div>
+              </div>
+
+              <!-- FRONT IMAGE -->
+              <div class="flex items-center justify-center ml-4">
+                <img :src="pokemon.sprites.front_default" :alt="pokemon.name" />
               </div>
             </div>
-          </div>
+
+            <!-- MOVES -->
+            <h4 class="text-gray-900 text-sm font-bold uppercase leading-none mb-2 text-center mt-4">Moves</h4>
+            <div class="grid grid-cols-3 gap-2 item-center justify-center md:grid-cols-5">
+              <template x-for="pokemonMove in pokemon.moves" :key="pokemonMove.move.name">
+                <span x-text="pokemonMove.move.name"
+                  class="flex items-center justify-center text-center bg-blue-200 rounded-full px-3 py-1 text-xs font-semibold text-black">
+                </span>
+              </template>
+            </div>
+
+            <!-- ALL SPRITES -->
+            <template x-if="sprites">
+              <div>
+                <h4 class="text-gray-900 text-sm font-bold uppercase leading-none mb-2 text-center mt-6">Sprites</h4>
+                <div class="flex items-center justify-start w-full overflow-x-auto md:justify-around">
+                  <template x-for="pokemonSprite in sprites" :key="pokemonSprite">
+                    <img :src="pokemonSprite" alt="pokemon sprite" />
+                  </template>
+                </div>
+              </div>
+            </template>
+          </template>
+        </template>
+        <template x-if="!pokemon && !isLoading">
+          <p class="pt-4 italic text-sm text-center">Sorry, no pokemon found. Try a different name.</p>
         </template>
       </div>
-    </div>
+
     <script>
       function pokeSearch() {
-          return {
-            pokemonSearch: "charizard",
-            pokemon: null,
-            isLoading: false,
-            fetchPokemon() {
-              this.isLoading = true;
-              fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)
-                .then(res => res.json())
-                .then(data => {
-                  this.isLoading = false;
+        return {
+          pokemonSearch: "charizard",
+          pokemon: null,
+          isLoading: false,
+          fetchPokemon() {
+            this.isLoading = true;
+            fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)
+              .then(res => res.json())
+              .then(data => {
+                this.isLoading = false;
+                if (typeof data === 'object') {
                   this.pokemon = data;
-                });
-            }
-          };
-        }
+                  this.sprites = Object.values(this.pokemon.sprites).filter(item => typeof item === 'string' || item instanceof String)
+                  this.types = this.pokemon.types.map(type => type.type.name)
+                } else {
+                  this.pokemon = null
+                  this.sprites = null
+                  this.types = null
+                }
+              })
+              .catch(err => {
+                console.log(err)
+                this.isLoading = false
+                this.pokemon = null
+                this.sprites = null
+                this.types = null
+              })
+          }
+        };
+      }
     </script>
   </body>
 </html>

@@ -19,3 +19,9 @@ My other Alpine.js examples in this repo:
   - [User Card with Favorite Animal](https://ethyl2.github.io/alpine-matching/create-user)
   - [Pet Care Tasks](https://ethyl2.github.io/alpine-matching/tasks)
   - [Reveal the Mystery Animal (Transition Example)](https://ethyl2.github.io/alpine-matching/transition)
+  - [Pokemon Search](https://ethyl2.github.io/alpine-matching/pokemon)
+
+The pokemon search page queries this API:
+[Pokeapi](https://pokeapi.co/docs/v2#pokemon)
+
+Example that inspired me: [Alpine.js article](https://css-tricks.com/alpine-js-the-javascript-framework-thats-used-like-jquery-written-like-vue-and-inspired-by-tailwindcss/)
